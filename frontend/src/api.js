@@ -1142,6 +1142,20 @@ export default class API {
     }
   }
 
+  static async getLatestRelease() {
+    try {
+      const response = await fetch(
+        'https://api.github.com/repos/Dispatcharr/Dispatcharr/releases/latest'
+      );
+      if (!response.ok) {
+        throw new Error('Failed to fetch latest release');
+      }
+      return await response.json();
+    } catch (e) {
+      errorNotification('Failed to retrieve latest release', e);
+    }
+  }
+
   static async checkSetting(values) {
     const { id, ...payload } = values;
 
